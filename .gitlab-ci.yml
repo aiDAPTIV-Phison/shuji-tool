@@ -1,0 +1,16 @@
+# Self-contained pipeline: no external/internal config includes.
+stages:
+  - test
+
+pytest:
+  stage: test
+  image: python:3.12-slim
+  variables:
+    PYTHONPATH: src
+  before_script:
+    - pip install --no-cache-dir -r requirements-test.txt
+  script:
+    - pytest -q
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+    - if: $CI_COMMIT_BRANCH

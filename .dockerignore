@@ -1,0 +1,10 @@
+# ignore development files
+.venv
+.git
+*.pyc
+__pycache__
+logs
+
+# ignore model and audio files
+faster-whisper-large-v3-turbo-ct2
+audio_samples
