@@ -2,6 +2,6 @@
 
 # Test + lint tooling. Tests stub out torch / whisperx / faster-whisper (see
 # tests/conftest.py), so they run without GPU libraries present.
-pytest>=8.0
-httpx>=0.27          # required by fastapi.testclient.TestClient
-pylint>=3.0
+pytest==9.1.1
+httpx==0.28.1        # required by fastapi.testclient.TestClient
+pylint==4.1.3
