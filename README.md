@@ -13,13 +13,13 @@ Shuji-Tool wraps [faster-whisper](https://github.com/SYSTRAN/faster-whisper) in 
 
 ## Why another Whisper server
 
-**Realtime decoding without sticky sessions.** Chunk decoding and voice-activity detection are separate stateless endpoints: every request carries its own complete audio window, and the service keeps no per-stream state. Replicas sit behind a plain round-robin load balancer — no sticky routing, no state blobs in the API contract, no separate deployment for VAD. Windowing and finalization stay with the caller. ([ADR-0001](docs/adr/0001-realtime-vad-endpoint.md))
+**Realtime decoding without sticky sessions.** Chunk decoding and voice-activity detection are separate stateless endpoints: every request carries its own complete audio window, and the service keeps no per-stream state. Replicas sit behind a plain round-robin load balancer — no sticky routing, no state blobs in the API contract, no separate deployment for VAD. Windowing and finalization stay with the caller.
 
-**Diarization that survives an OpenAI-shaped API.** Speaker labels are never mixed into transcript text. They appear only in a non-standard `speaker` field on `verbose_json` segments, so downstream consumers such as LiteLLM still see clean transcripts in `text` while retaining the material to reassemble speaker turns. ([ADR-0003](docs/adr/0003-openai-speaker-labels.md))
+**Diarization that survives an OpenAI-shaped API.** Speaker labels are never mixed into transcript text. They appear only in a non-standard `speaker` field on `verbose_json` segments, so downstream consumers such as LiteLLM still see clean transcripts in `text` while retaining the material to reassemble speaker turns.
 
 **Hallucination filtering built in.** Whisper reliably invents subtitle credits and channel sign-offs over silence. Shuji-Tool drops known boilerplate by blacklist and trims leading/trailing segments using `no_speech_prob`, `avg_logprob`, and duration thresholds — all tunable by environment variable.
 
-**A parameter channel that survives a proxy.** faster-whisper-specific knobs (beam size, hotwords, VAD thresholds, diarization) travel as non-standard multipart fields, which OpenAI clients send via `extra_body` and LiteLLM forwards untouched. You keep cost tracking and fallback instead of resorting to a pass-through endpoint. ([ADR-0002](docs/adr/0002-openai-compatible-endpoint.md))
+**A parameter channel that survives a proxy.** faster-whisper-specific knobs (beam size, hotwords, VAD thresholds, diarization) travel as non-standard multipart fields, which OpenAI clients send via `extra_body` and LiteLLM forwards untouched. You keep cost tracking and fallback instead of resorting to a pass-through endpoint.
 
 ---
 

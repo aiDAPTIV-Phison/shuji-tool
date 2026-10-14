@@ -13,13 +13,13 @@ Shuji-Tool 以 FastAPI 封裝 [faster-whisper](https://github.com/SYSTRAN/faster
 
 ## 為什麼不是又一個 Whisper server
 
-**即時解碼不需要 sticky session。** Chunk 解碼與語音活動偵測是各自獨立的無狀態端點：每次請求自帶完整音訊窗，服務不持有 per-stream 狀態。副本可以掛在單純的 round-robin 負載平衡器後面——不需要 sticky routing、API 契約裡不放 state blob、也不必為 VAD 另開一個 Deployment。切窗與判斷是否 final 由呼叫端負責。（[ADR-0001](docs/adr/0001-realtime-vad-endpoint.md)）
+**即時解碼不需要 sticky session。** Chunk 解碼與語音活動偵測是各自獨立的無狀態端點：每次請求自帶完整音訊窗，服務不持有 per-stream 狀態。副本可以掛在單純的 round-robin 負載平衡器後面——不需要 sticky routing、API 契約裡不放 state blob、也不必為 VAD 另開一個 Deployment。切窗與判斷是否 final 由呼叫端負責。
 
-**語者分離不破壞 OpenAI 契約。** Speaker label 不會混進逐字稿文字，只出現在 `verbose_json` 片段的非標準 `speaker` 欄位。這樣 LiteLLM 這類下游拿到的 `text` 仍是乾淨逐字稿，同時保有能重組語者輪次的材料。（[ADR-0003](docs/adr/0003-openai-speaker-labels.md)）
+**語者分離不破壞 OpenAI 契約。** Speaker label 不會混進逐字稿文字，只出現在 `verbose_json` 片段的非標準 `speaker` 欄位。這樣 LiteLLM 這類下游拿到的 `text` 仍是乾淨逐字稿，同時保有能重組語者輪次的材料。
 
 **內建幻覺過濾。** Whisper 在靜音處會穩定地捏造字幕組署名與頻道結語。Shuji-Tool 以 blacklist 移除已知樣板，並依 `no_speech_prob`、`avg_logprob` 與片段長度砍掉頭尾片段，門檻全部可由環境變數調整。
 
-**參數通道穿得過 proxy。** faster-whisper 專屬旋鈕（beam size、熱詞、VAD 門檻、diarization）以非標準 multipart 欄位傳遞，OpenAI client 透過 `extra_body` 送出，LiteLLM 原樣轉發。不必改用 pass-through 端點，因此成本追蹤與 fallback 都還在。（[ADR-0002](docs/adr/0002-openai-compatible-endpoint.md)）
+**參數通道穿得過 proxy。** faster-whisper 專屬旋鈕（beam size、熱詞、VAD 門檻、diarization）以非標準 multipart 欄位傳遞，OpenAI client 透過 `extra_body` 送出，LiteLLM 原樣轉發。不必改用 pass-through 端點，因此成本追蹤與 fallback 都還在。
 
 ---
 
