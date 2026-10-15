@@ -1,6 +1,19 @@
-# Self-contained pipeline: no external/internal config includes.
+# Open-source gate and GitHub publish come from the shared CI project.
+# Every branch is checked; a branch that passes is pushed to the private GitHub repository.
+include:
+  - project: 'kino_lian/oss-shared-ci'
+    file: '/oss-release.yml'
+    ref: main
+  - project: 'kino_lian/oss-shared-ci'
+    file: '/oss-sbom.yml'
+    ref: main
+
+# Must list every stage: a project-level stages key replaces the included ones.
 stages:
   - test
+  - sbom
+  - security_check
+  - push_to_github
 
 pytest:
   stage: test
