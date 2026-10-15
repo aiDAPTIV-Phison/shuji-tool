@@ -360,4 +360,4 @@ Image 座標可用 `IMAGE_REGISTRY`、`IMAGE_NAME`、`IMAGE_VERSION` 覆寫；`m
 
 Apache License 2.0——見 [LICENSE](LICENSE) 與 [NOTICE](NOTICE)。
 
-第三方元件與其授權列於 [THIRD-PARTY-NOTICES.md](THIRD-PARTY-NOTICES.md)，全部為寬鬆授權（BSD-2-Clause、BSD-3-Clause、MIT、Apache-2.0），沒有任何 copyleft 義務。模型權重由各自作者獨立授權、不隨本專案散布——其中語者分離 pipeline 是 gated 且要求署名。
+第三方元件與其授權列於 [THIRD-PARTY-NOTICES.md](THIRD-PARTY-NOTICES.md)。Python 套件皆為寬鬆授權；GPU 推論所需的 NVIDIA CUDA 函式庫屬 NVIDIA 專有授權，由你安裝時自行下載，本專案不散布。模型權重由各自作者獨立授權、不隨本專案散布——其中語者分離 pipeline 是 gated 且要求署名。

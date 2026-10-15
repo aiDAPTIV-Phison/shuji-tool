@@ -360,4 +360,4 @@ This open-source release does not provide real-time vulnerability fixes; securit
 
 Apache License 2.0 — see [LICENSE](LICENSE) and [NOTICE](NOTICE).
 
-Third-party components and their licenses are listed in [THIRD-PARTY-NOTICES.md](THIRD-PARTY-NOTICES.md). All are permissive (BSD-2-Clause, BSD-3-Clause, MIT, Apache-2.0); none imposes copyleft obligations. Model weights are licensed separately by their authors and are not distributed with this project — the diarization pipeline in particular is gated and requires attribution.
+Third-party components and their licenses are listed in [THIRD-PARTY-NOTICES.md](THIRD-PARTY-NOTICES.md). The Python packages are under permissive licenses. GPU inference relies on NVIDIA CUDA libraries under NVIDIA's proprietary license, which you download yourself when installing; this project does not redistribute them. Model weights are licensed separately by their authors and are not distributed with this project — the diarization pipeline in particular is gated and requires attribution.

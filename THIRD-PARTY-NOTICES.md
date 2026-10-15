@@ -1,8 +1,10 @@
 # Third-Party Notices
 
-Shuji-Tool is distributed under the Apache License 2.0. It depends on the
-third-party components listed below. All of them are under permissive licenses;
-none imposes copyleft obligations on this project.
+Shuji-Tool is distributed under the Apache License 2.0. The Python packages
+listed below are under permissive licenses. Some components that you download
+when installing the GPU dependencies or building the Docker image are not: see
+[NVIDIA components](#nvidia-components) and
+[System components](#system-components).
 
 If you redistribute a built artifact that bundles these packages (for example a
 Docker image containing `site-packages`), the BSD- and MIT-licensed components
@@ -45,10 +47,25 @@ them.
 | [`pyannote/speaker-diarization-3.1`](https://huggingface.co/pyannote/speaker-diarization-3.1) | MIT | **Gated** — the pipeline used by pyannote.audio 3.x |
 | wav2vec2 alignment models | Apache-2.0 / MIT | Selected per language by WhisperX; see the model card of the one you use |
 
+## NVIDIA components
+
+GPU inference uses NVIDIA CUDA libraries that are distributed under NVIDIA's
+proprietary license, not an open-source license: the `nvidia-*-cu12` wheels
+that PyTorch installs (cuBLAS, cuDNN, cuFFT, cuRAND, cuSOLVER, cuSPARSE,
+cuSPARSELt, cuFile, nvJitLink, CUDA runtime, NVRTC, CUPTI) and the
+`nvidia/cuda` base image in the `Dockerfile`.
+
+This repository contains only source code and the `Dockerfile`; it does not
+include or redistribute any NVIDIA software, and no pre-built image is
+published. When you `pip install` the requirements or build the image, you
+download these components from PyPI or NVIDIA directly and accept NVIDIA's
+license terms yourself. If you redistribute an image you built, review those
+terms first. CPU-only use does not need them.
+
 ## System components
 
 FFmpeg is installed in the container image and is used both as a CLI and, via
-its shared `libav*` libraries, by `torchcodec`. Ubuntu's default FFmpeg
-packages are LGPL-licensed and are dynamically linked; if you publish a
-pre-built image, verify that the FFmpeg build you ship matches your
-distribution policy.
+its shared `libav*` libraries, by `torchcodec`. Ubuntu's FFmpeg packages are
+built with `--enable-gpl`, so they are GPL-licensed builds; they are installed
+by the package manager and dynamically linked. If you publish a pre-built
+image, verify that the FFmpeg build you ship matches your distribution policy.
