@@ -17,3 +17,8 @@ OpenCC==1.2.0
 pydub==0.25.1
 requests==2.33.1
 numpy==2.5.4
+
+# tests/utils/test_telemetry.py imports these; same pins as requirements.txt.
+opentelemetry-api==1.44.0
+opentelemetry-sdk==1.44.0
+opentelemetry-exporter-otlp-proto-grpc==1.44.0
