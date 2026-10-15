@@ -5,6 +5,7 @@
 # only needs the pure-Python packages that src/ imports for real.
 #
 # Use requirements-dev.txt instead when you want to actually run the service.
+-c constraints-test.txt
 pytest==9.1.1
 httpx==0.28.1        # required by fastapi.testclient.TestClient
 
@@ -15,7 +16,7 @@ pydantic_core==2.41.5
 python-multipart==0.0.31
 OpenCC==1.2.0
 pydub==0.25.1
-requests==2.33.1
+requests==2.34.2
 numpy==2.5.4
 
 # tests/utils/test_telemetry.py imports these; same pins as requirements.txt.

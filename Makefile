@@ -18,8 +18,7 @@ PIP := pip
 PY_RUN :=
 endif
 
-# Build stage. runtime = plain Python (default), dev = + test tooling,
-# final = Nuitka-compiled binary.
+# Build stage. runtime = plain Python (default), dev = + test tooling.
 # Usage: STAGE=dev make image
 STAGE ?= runtime
 
@@ -34,7 +33,7 @@ help: ## Show this help message
 	@printf "\n"
 	@printf "\033[32mVariables:\033[0m\n"
 	@printf "  RUN_IN_UV=1          Use uv run / uv pip for Python commands, default: $(RUN_IN_UV)\n"
-	@printf "  STAGE=<stage>        Docker build stage: runtime | dev | final, default: $(STAGE)\n"
+	@printf "  STAGE=<stage>        Docker build stage: runtime | dev, default: $(STAGE)\n"
 	@printf "  IMAGE_REGISTRY=<ns>  Image namespace or registry, default: $(IMAGE_REGISTRY)\n"
 	@printf "  IMAGE_VERSION=<tag>  Image tag, default: $(IMAGE_VERSION)\n"
 	@printf "\n"

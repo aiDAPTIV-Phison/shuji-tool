@@ -345,7 +345,6 @@ make help     # 列出所有 target 與變數
 |---|---|---|
 | `runtime` | 純 Python、非 root——預設 stage | `make image` |
 | `dev` | 含建置工具與測試依賴 | `STAGE=dev make image` |
-| `final` | Nuitka 編譯的二進位、非 root | `STAGE=final make image` |
 | `base` | 共用的依賴層 | – |
 
 Image 座標可用 `IMAGE_REGISTRY`、`IMAGE_NAME`、`IMAGE_VERSION` 覆寫；`make push` 會先建置再推送。Image 的 `TZ` 預設為 `UTC`，若希望 log 時間戳為本地時間，建置時加 `--build-arg TZ=Asia/Taipei`。

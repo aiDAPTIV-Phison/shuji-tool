@@ -345,7 +345,6 @@ The test suite stubs out every GPU and native dependency in [`tests/conftest.py`
 |---|---|---|
 | `runtime` | Plain Python, non-root — the default | `make image` |
 | `dev` | Build tooling plus test dependencies | `STAGE=dev make image` |
-| `final` | Nuitka-compiled binary, non-root | `STAGE=final make image` |
 | `base` | Shared dependency layer | – |
 
 Override the image coordinates with `IMAGE_REGISTRY`, `IMAGE_NAME`, and `IMAGE_VERSION`; `make push` builds and pushes. The container image defaults to `TZ=UTC` — pass `--build-arg TZ=Asia/Taipei` (or your zone) if log timestamps should be local.
